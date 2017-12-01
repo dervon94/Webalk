@@ -27,7 +27,6 @@
 <body>
 <div id="MenuBar"><button id="listRunners">Runners</button></div>
 
-</div>
 <div id="Content">
 </div>
 </body>

@@ -16,7 +16,7 @@ import java.util.HashSet;
 
 public class RunnerMemoryDAO implements RunnerDAO {
     private static Collection<Runner> db;
-    static SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
+    private static SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
     String dateInString = "31-08-1982 10:20:56";
 
     static {
