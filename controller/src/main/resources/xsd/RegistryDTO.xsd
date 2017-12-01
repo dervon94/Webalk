@@ -1,0 +1,18 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://services.memorynotfound.com/"
+           elementFormDefault="qualified">
+
+
+    <xs:complexType name="RunnerRegistrationRequest">
+        <xs:sequence>
+            <xs:element name="idNumber" type="xs:string"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="homeCountry" type="xs:string"/>
+            <xs:element name="birthDate" type="xs:dateTime"/>
+            <xs:element name="birthCity" type="xs:string"/>
+            <xs:element name="gender" type="xs:string"/>
+            <xs:element name="distance" type="xs:string"/>
+            <xs:element name="regDate" type="xs:dateTime"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
