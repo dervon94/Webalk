@@ -9,6 +9,7 @@ import hu.iit.uni.miskolc.model.RunnerDistance;
 import hu.iit.uni.miskolc.model.RunnerGender;
 import hu.iit.uni.miskolc.model.exceptions.InvalidCountryException;
 import hu.iit.uni.miskolc.service.exceptions.ExistingIdNumberException;
+import hu.iit.uni.miskolc.service.exceptions.IdNotFoundException;
 
 import java.util.Collection;
 import java.util.Date;
@@ -38,9 +39,13 @@ public class RegistryManagerServiceImpl implements RegistryManagerService {
         return runnerDAO.listRunnersByCountry(RunnerCountry.valueOf(country));
     }
 
-    public Runner searchRunnerById(String id) throws RunnerNotFoundException {
-
-        return  runnerDAO.readRunnerById(id);
+    public Runner searchRunnerById(String id) throws IdNotFoundException {
+        Runner r=null;
+        try {r = runnerDAO.readRunnerById(id);}
+        catch (RunnerNotFoundException e){
+            throw  new IdNotFoundException(e);
+        }
+        return  r;
     }
 
     public void registRunner(Runner runner) throws ExistingIdNumberException {

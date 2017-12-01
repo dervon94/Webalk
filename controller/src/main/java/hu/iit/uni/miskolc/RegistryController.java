@@ -6,6 +6,7 @@ import hu.iit.uni.miskolc.model.exceptions.InvalidDistanceException;
 import hu.iit.uni.miskolc.model.exceptions.InvalidGenderException;
 import hu.iit.uni.miskolc.service.RegistryManagerService;
 import hu.iit.uni.miskolc.service.exceptions.ExistingIdNumberException;
+import hu.iit.uni.miskolc.service.exceptions.IdNotFoundException;
 import hu.uni.miskolc.iit.registry.controller.dto.RunnerRegistrationRequest;
 import hu.uni.miskolc.iit.webdevelopment.examples.cars.service.exceptions.ExistingPlateNumber;
 import org.springframework.http.HttpStatus;
@@ -32,6 +33,11 @@ public class RegistryController {
     @ResponseBody
     public Collection<Runner> listAllRunnerfromCountry(@PathVariable(value = "country") String c) throws InvalidCountryException {
         return registryManager.listRunnersByCountry(c);
+    }
+    @RequestMapping(value = {"/runner/{id}"}, method = {RequestMethod.GET}, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Runner showRunnerById (@PathVariable(value = "id") String c) throws  IdNotFoundException {
+        return registryManager.searchRunnerById(c);
     }
 
     @RequestMapping(value = {"/register"}, method = {RequestMethod.POST}, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -63,11 +69,18 @@ public class RegistryController {
         return "Invalid Gender (MALE,FEMALE)!       "+ex.getMessage();
     }
 
+    @ExceptionHandler(value = {IdNotFoundException.class})
+    @ResponseBody
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    public String IdNotFoundExHandler(Exception ex){
+        return "Id Not Found!            "+ex.getMessage();
+    }
+
     @ExceptionHandler(value = {InvalidDistanceException.class})
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
     public String InvalidDistanceExHandler(Exception ex){
-        return "Invalid distance        "+ex.getMessage();
+        return "Invalid distance        "+Long.MAX_VALUE+ex.getMessage();
     }
 
 

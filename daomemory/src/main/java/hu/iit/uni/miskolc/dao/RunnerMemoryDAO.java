@@ -17,7 +17,6 @@ import java.util.HashSet;
 public class RunnerMemoryDAO implements RunnerDAO {
     private static Collection<Runner> db;
     private static SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
-    String dateInString = "31-08-1982 10:20:56";
 
     static {
         try {
@@ -51,7 +50,12 @@ public class RunnerMemoryDAO implements RunnerDAO {
 
     @Override
     public Runner readRunnerById(String idNumber) throws RunnerNotFoundException {
-        return null;
+        for (Runner r :db){
+            if(r.getIdNumber().matches(idNumber)){
+                return r;
+            }
+        }
+        throw new  RunnerNotFoundException();
     }
 
 

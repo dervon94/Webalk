@@ -6,6 +6,7 @@ import hu.iit.uni.miskolc.model.RunnerDistance;
 import hu.iit.uni.miskolc.model.RunnerGender;
 import hu.iit.uni.miskolc.model.exceptions.InvalidCountryException;
 import hu.iit.uni.miskolc.service.exceptions.ExistingIdNumberException;
+import hu.iit.uni.miskolc.service.exceptions.IdNotFoundException;
 
 import java.util.Collection;
 import java.util.Date;
@@ -20,7 +21,7 @@ public interface RegistryManagerService {
 
     Collection<Runner> listRunnersByCountry(String country) throws InvalidCountryException;
 
-   // Runner searchRunnerById(String Id) throws  RunnerNotFoundException;
+    Runner searchRunnerById(String Id) throws IdNotFoundException;
 
     void registRunner(Runner runner) throws ExistingIdNumberException;
 
